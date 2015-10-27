@@ -1,6 +1,5 @@
 # wordpuzzle
 
-
 I have created a simple web prototype. I have tested the code on firefox
 and chrome.
 
