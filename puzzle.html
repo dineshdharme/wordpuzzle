@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+
+  </head>
+  <body>
+
+  <div style="position:relative;">
+    
+    <h1 id="exp" onmouseup="myFunction(0)" >ABCDEFGH</h1>
+    <img id="left" onclick="myFunction(1)" src="leftarrow.png" onmouseover="hover(this, 'leftarrowhover.png');" onmouseout="unhover(this, 'leftarrow.png');" width="25" />
+    <img id="right" onclick="myFunction(2)" src="rightarrow.png" onmouseover="hover(this, 'rightarrowhover.png');" onmouseout="unhover(this, 'rightarrow.png');" width="25" />
+  </div>
+
+
+
+  Puzzle String: <input type="text" name="istr" ><br>
+  <button type="button" onclick="setString()">Set Puzzle String</button>
+  
+  <br /> <br /> <br />
+  
+  Copy paste the puzzles into the above input box and set the puzzle string.
+
+  <br /> <br /> <br />
+  
+  <table style="width:25%" border="1">
+  <tr>
+    <th align="left">Puzzle</th>
+    <th align="left">Solution</th>
+    
+  </tr>
+  <tr>
+    <td>LSIMPE</td>
+    <td>SIMPLE</td>
+    
+  </tr>
+
+  <tr>
+    <td>NDRKI</td>
+    <td>DRINK</td>
+    
+  </tr>
+
+  <tr>
+    <td>URNEAT</td>
+    <td>NATURE</td>
+    
+  </tr>
+
+  <tr>
+    <td>OMZIEB</td>
+    <td>ZOMBIE</td>
+    
+  </tr>
+
+  <tr>
+    <td>PSMLYI</td>
+    <td>SIMPLY</td>
+    
+  </tr>
+
+  <tr>
+    <td>RYGADET</td>
+    <td>TRAGEDY</td>
+    
+  </tr>
+
+  <tr>
+    <td>IISSSPMET</td>
+    <td>PESSIMIST</td>
+    
+  </tr>
+
+  <tr>
+    <td>IIMSOPTT</td>
+    <td>OPTIMIST</td>
+    
+  </tr>
+    
+
+</table> 
+
+<script>
+
+function setString()
+{
+  var x = document.getElementsByName("istr")[0];
+  text  = x.value;
+  
+  if (text.length < 3){
+    alert("Please enter a string > 3");
+    return;
+  }
+
+  ele = document.getElementById("exp"); 
+  ele.innerHTML = text.toUpperCase();
+
+}
+
+function myFunction(flag) {
+
+    // make sure something is seleccted and that more than one letter is selected
+    if( window.getSelection().getRangeAt(0) &&  window.getSelection().getRangeAt(0).toString().length > 1 ){
+
+    var p = window.getSelection().getRangeAt(0) ;
+    var text = p.toString();
+    
+    var r=p.getBoundingClientRect();
+    
+    var relative=document.getElementById("exp").getBoundingClientRect();
+
+    //alert("You selected some text! : "+ text + r.top + "<br />" + r.bottom + "<br />" + r.left + "<br />" + r.right);
+    
+    var leftimage = document.getElementById("left");
+    setPostion(leftimage , r.bottom - relative.top, r.left - relative.left);
+
+    var rightimage = document.getElementById("right");
+    setPostion(rightimage , r.bottom - relative.top , r.right - 25 - relative.left);
+    
+
+    if (flag == 1){
+
+      p.deleteContents();
+      
+      firstLetter = text.charAt(0);
+      text2 = text.slice(1);
+      text2 = text2 + firstLetter;
+      textNode = new Text(text2);
+
+      p.insertNode(textNode);
+   }
+
+  if (flag == 2){
+
+      p.deleteContents();
+      
+      lastLetter = text.charAt(text.length-1);
+      
+      text2 = text.slice(0, -1)
+      text2 = lastLetter + text2 ;
+      textNode = new Text(text2);
+
+      p.insertNode(textNode);
+   }
+
+  } 
+}
+
+function setPostion(ele, top, left)
+{
+  ele.style.position = "absolute"
+  ele.style.top = top + 'px';
+  ele.style.left =  left + 'px';
+
+}
+
+function hover(element , src) {
+    element.setAttribute('src', src);
+}
+function unhover(element, src) {
+    element.setAttribute('src', src);
+}
+
+</script>
+
+  </body>
+
+</html>
